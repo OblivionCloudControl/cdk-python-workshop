@@ -5,6 +5,7 @@ from cdk_python_workshop.lambda_sns_publish import LambdaSnsPublishStack
 from cdk_python_workshop.lambda_sqs_source import LambdaSqsSourceStack
 from cdk_python_workshop.role_arn import RoleArnStack
 from cdk_python_workshop.perm_boundary_aspect import PermissionsBoundaryAspect
+from cdk_python_workshop.challenge_c import ChallengeCStack
 
 
 app = cdk.App()
@@ -22,6 +23,10 @@ LambdaSqsSourceStack(app, "LambdaSqsSourceStack",
     )
 
 RoleArnStack(app, "RoleArnStack",
+    env=environment,
+    )
+
+ChallengeCStack(app, "ChallengeCStack",
     env=environment,
     )
 
