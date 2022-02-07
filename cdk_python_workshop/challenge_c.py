@@ -41,8 +41,8 @@ class ChallengeCStack(Stack):
             ],
         )
 
-        # DO NOT USE THE SPECIAL DATABASE SECRET IN SECRETS MANAGER.
-        # It must be a custom secret, using key/value combo in JSON format.
+        # DO NOT USE THE SPECIAL RDS SECRET TYPE IN SECRETS MANAGER.
+        # It must be an "Other type" secret, using key/value combo in JSON format.
         # See here for correct formatting of secret:
         # https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_rds.Credentials.html#static-fromwbrpasswordusername-password
         database_secret = secretsmanager.Secret.from_secret_name_v2(
@@ -82,9 +82,7 @@ class ChallengeCStack(Stack):
                 # In this case, fetch the name from SSM parameters and use property subnet_group
                 vpc_subnets=ec2.SubnetType.PRIVATE_ISOLATED,
                 vpc=vpc,
-                instance_type=ec2.InstanceType(
-                    instance_type_identifier="t4g.medium"
-                ),
+                instance_type=ec2.InstanceType(instance_type_identifier="t4g.medium"),
             ),
             instances=random_instance_number,
             # Don't set DESTROY on production. It helps speed up deletion of the cluster.
@@ -94,14 +92,17 @@ class ChallengeCStack(Stack):
         # Finally, write out the endpoints to SSM
         ssm.StringParameter(
             self,
-            "myWriterEndpoint",
+            "AuroraWriterEndpoint",
             parameter_name="/example/challenge_c/writer_endpoint",
             string_value=aurora_cluster.cluster_endpoint.socket_address,
         )
 
         ssm.StringParameter(
             self,
-            "myReaderEndpoint",
+            "AuroraReaderEndpoint",
             parameter_name="/example/challenge_c/reader_endpoint",
             string_value=aurora_cluster.cluster_read_endpoint.socket_address,
         )
+
+
+# Try running `cdk diff` on this stack a few times! You'll see that the random number will create/destroy some instances.
