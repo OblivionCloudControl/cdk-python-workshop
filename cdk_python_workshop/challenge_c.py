@@ -8,7 +8,6 @@ from aws_cdk import (
     aws_ssm as ssm,
     aws_ec2 as ec2,
 )
-
 from constructs import Construct
 
 
@@ -17,7 +16,6 @@ ISOLATED_SUBNET_KEY = "/example/vpc/isolated-subnet-{}-id"
 
 class ChallengeCStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
-
         super().__init__(scope, construct_id, **kwargs)
 
         # Use "value_for_string_parameter" to get the value during synth

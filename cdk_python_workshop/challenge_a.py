@@ -6,7 +6,6 @@ from aws_cdk import (
     aws_cloudfront as cloudfront,
     aws_cloudfront_origins as origins,
 )
-
 from constructs import Construct
 
 

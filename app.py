@@ -7,6 +7,7 @@ from cdk_python_workshop.role_arn import RoleArnStack
 from cdk_python_workshop.perm_boundary_aspect import PermissionsBoundaryAspect
 from cdk_python_workshop.challenge_a import ChallengeAStack
 from cdk_python_workshop.challenge_c import ChallengeCStack
+from cdk_python_workshop.challenge_d import ChallengeDStack
 
 
 app = cdk.App()
@@ -32,6 +33,10 @@ ChallengeAStack(app, "ChallengeAStack",
     )
 
 ChallengeCStack(app, "ChallengeCStack",
+    env=environment,
+    )
+
+ChallengeDStack(app, "ChallengeDStack",
     env=environment,
     )
 
