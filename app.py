@@ -6,6 +6,7 @@ from cdk_python_workshop.lambda_sqs_source import LambdaSqsSourceStack
 from cdk_python_workshop.role_arn import RoleArnStack
 from cdk_python_workshop.perm_boundary_aspect import PermissionsBoundaryAspect
 from cdk_python_workshop.challenge_a import ChallengeAStack
+from cdk_python_workshop.challenge_b import ChallengeBStack
 from cdk_python_workshop.challenge_c import ChallengeCStack
 from cdk_python_workshop.challenge_d import ChallengeDStack
 
@@ -29,6 +30,10 @@ RoleArnStack(app, "RoleArnStack",
     )
 
 ChallengeAStack(app, "ChallengeAStack",
+    env=environment,
+    )
+
+ChallengeBStack(app, "ChallengeBStack",
     env=environment,
     )
 
